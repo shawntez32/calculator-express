@@ -21,11 +21,14 @@ app.post("/", function(request, response){
   response.send("The answer is " + result);
 });
 
-app.get("/contact", function(request, response){
-  response.send('Contact me at musamarket@gmail.com');
+app.get("/bmicalculator", function(request, response){
+  response.sendFile(__dirname + "/bmicalculator.html");
 });
 
-app.listen(3000, function(){
-  console.log('Server started on Port 3000!');
-  console.log('..............................')
+app.post("/bmicalculator", function(request, response){
+  var height = parseFloat(request.body.height);
+  var weight = parseFloat(request.body.weight);
+
+  var bmi = weight / (height * height);
+  response.send("Your bmi is " + (bmi * 703));
 });
